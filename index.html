@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Startup Idea Generator</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Startup Idea Generator 🚀</h1>
+
+<p>Generate a random startup idea.</p>
+
+<div class="idea-box">
+
+<h2 id="idea">{{ idea }}</h2>
+
+</div>
+
+<br>
+
+<button onclick="generateIdea()">Generate Idea</button>
+
+<button onclick="copyIdea()">Copy Idea</button>
+
+</div>
+
+<script>
+
+function generateIdea(){
+
+fetch("/new_idea")
+
+.then(response => response.json())
+
+.then(data => {
+
+document.getElementById("idea").innerText = data.idea;
+
+});
+
+}
+
+function copyIdea(){
+
+const idea = document.getElementById("idea").innerText;
+
+navigator.clipboard.writeText(idea);
+
+alert("Idea copied!");
+
+}
+
+</script>
+
+</body>
+</html>
